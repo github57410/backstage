@@ -1,0 +1,130 @@
+0 在服务端创建初始库 复制http地址
+1 git init表示创建本地的库
+
+将状态改变的代码提交至缓存：git add + 文件git add -u + 路径：将修改过的被跟踪代码提交缓存git add -A + 路径: 将修改过的未被跟踪的代码提交至缓存
+将代码提交到本地仓库中：git commit -m “注释部分 ref T3070”
+将代码推送到服务器：git push
+
+
+准备
+
+1.下载并安装Git; 
+2.在github上注册了一个账号； 
+
+3.在github上创建了一个仓库；
+
+环境
+
+win 8.1
+
+开始
+
+1.创建SSH Key。在用户目录下，看看有没有.ssh目录。如果有的话，看看该目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到第二步。
+如果没有，打开Git Bash，创建SSH Key：
+
+ $ ssh-keygen -t rsa -C "XXX@XXX.com"
+1
+.ssh目录下会有两个文件：id_rsa是私钥，不能泄露; id_rsa.pub是公钥
+
+
+2.登陆GitHub，打开“Account settings”，“SSH Keys”页面： 
+然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容，必须注意粘贴的是公钥id_rsa.pub。最后点“Add Key”。
+
+
+3.在本地建一个文件夹，文件夹的名字和github上的仓库名称一样（我就是因为不一样结果试了好多次都push得有问题） 
+
+4.打开git bash:
+
+a. 先初始化：
+
+git init
+1
+
+
+如果没有先这样做的话，到后续操作会出现：
+
+
+
+b.将本地仓库与远程仓库关联
+
+git remote add origin git@github.com:github的用户名/仓库名.git
+1
+这里，远程库的名字就是origin，这是Git默认的叫法，也可以改成别的，但是origin这个名字一看就知道是远程库。 
+然后再测试一下是否成功：
+
+git remote
+1
+应该会输出origin
+
+c. 添加到缓冲区
+
+git add .
+1
+注意add 后面是空格，然后是 .
+
+git add . : 监控工作区的状态树，使用它会把工作时的所有变化提交到暂存区，包括文件内容修改(modified)以及新文件(new)，但不包括被删除的文件。
+
+d.填写提交说明
+
+git commit -m "提交的说明信息"
+1
+e.提交
+
+git push -u origin master 
+
+
+
+更新github上的代码
+
+
+一、克隆代码
+
+1、把大神的代码clone到本地，或者clone自己github上的代码使用命令
+
+git clone https://github.com/gubai/gubai.git
+2、在本地随便建一个文件夹，在地址栏输入cmd打开，然后输入上面的命令
+
+
+
+
+二、git status查看状态
+1、查看当前的git仓库状态，可以使用git status
+
+>git status
+
+2、如果是在刚才新建的文件夹输入git status 会提示你git目录不对
+3、先用cd命令切换到gubai这个repository目录
+4、再输入git status可以看到On branch master,这个说明已经在master分之上了
+
+三、更新代码
+1、在gubai文件夹下更细东西，比如我上传一个脚本文件(139_login.py)
+
+
+
+
+
+2、更新后使用git add * --代表更新全部
+
+>git add *
+
+3、接着输入git commit -m "更新说明"，commit只是提交到缓存区域
+>git commit -m "更新说明”
+
+
+
+4、如果多人同时开发维护代码，得先git pull,拉取当前分支最新代码
+
+>git pull
+5、最后git push origin master,最后一步才是push到远程master分支上
+
+6、打开github界面就能看到同步了
+
+
+
+
+
+
+
+
+
+
